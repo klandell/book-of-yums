@@ -1,0 +1,7 @@
+{
+  "name": "book-of-yums",
+  "version": "0.0.1",
+  "description": "A book of yummy stuff",
+  "main": "index.js",
+  "license": "GPLv3"
+}
