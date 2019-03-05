@@ -1,0 +1,27 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "airbnb", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "@typescript-eslint/indent": "off",
+    "no-plusplus": "off",
+    "no-use-before-define": "off",
+    "max-len": [
+      "error",
+      80,
+      {
+        "ignoreComments": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true
+      }
+    ],
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}
