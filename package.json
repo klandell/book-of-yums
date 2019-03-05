@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "start": "yarn tsc && node build/start"
+    "start": "tsc && node build/start"
   },
   "dependencies": {
     "dotenv": "^6.2.0",
