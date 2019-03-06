@@ -1,10 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { App } from './components';
+
 // render the App component to the root node
-ReactDOM.render(
-  <Fragment>
-    <div>Oh, Hai!</div>
-  </Fragment>,
-  document.getElementById('root'),
-);
+ReactDOM.render(<App />, document.getElementById('root'));

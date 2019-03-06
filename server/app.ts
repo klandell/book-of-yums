@@ -5,9 +5,9 @@ import timer from 'koa-response-time';
 import logger from 'koa-logger';
 import bodyparser from 'koa-bodyparser';
 import session from 'koa-session';
+import send from 'koa-send';
 
 // import passport from 'koa-passport';
-import send from 'koa-send';
 // import csrf from 'koa-csrf';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -49,7 +49,7 @@ app.use(
   ),
 );
 
-// send back statid files on a route miss
+// send back static files on a route miss
 app.use(async (ctx, next) => {
   const p = ctx.path === '/' ? '/index.html' : ctx.path;
   await send(ctx, p, { root: 'dist/public' });
