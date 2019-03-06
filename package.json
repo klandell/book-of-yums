@@ -5,7 +5,6 @@
   "main": "dist/start.js",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "postinstall": "yarn build",
     "build": "tsc && webpack",
     "start": "node dist/start"
   },
@@ -57,5 +56,6 @@
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
-  }
+  },
+  "heroku-run-build-script": true
 }
