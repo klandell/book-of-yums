@@ -1,5 +1,5 @@
 {
-  "extends": ["plugin:@typescript-eslint/recommended", "airbnb", "prettier"],
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -21,6 +21,7 @@
       }
     ],
     "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
     "react/jsx-filename-extension": "off"
   }
 }
