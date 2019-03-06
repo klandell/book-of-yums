@@ -1,17 +1,18 @@
-const Koa = require('koa');
-const timer = require('koa-response-time');
-const logger = require('koa-logger');
-const bodyparser = require('koa-bodyparser');
-const session = require('koa-session');
-// const passport = require('koa-passport');
-// const send = require('koa-send');
-// const csrf = require('koa-csrf');
-const path = require('path');
+// cnst Koa = require('koa');
+import path from 'path';
+import Koa from 'koa';
+import timer from 'koa-response-time';
+import logger from 'koa-logger';
+import bodyparser from 'koa-bodyparser';
+import session from 'koa-session';
+
+// import passport from 'koa-passport';
+import send from 'koa-send';
+// import csrf from 'koa-csrf';
 
 const isProduction = process.env.NODE_ENV === 'production';
 if (!isProduction) {
-  // eslint-disable-next-line global-require
-  require('dotenv').config({ path: path.join(__dirname, '../.env') });
+  require('dotenv').config({ path: path.join(__dirname, '../.env') }); // eslint-disable-line global-require
 }
 const { SESSION_SECRET } = process.env;
 
@@ -48,9 +49,10 @@ app.use(
   ),
 );
 
-// simple dummy router
-app.use(async ctx => {
-  ctx.body = 'Hello World';
+// send back statid files on a route miss
+app.use(async (ctx, next) => {
+  const p = ctx.path === '/' ? '/index.html' : ctx.path;
+  await send(ctx, p, { root: 'dist/public' });
 });
 
 export default app;
