@@ -9,12 +9,12 @@ module.exports = {
   target: 'web',
   mode: NODE_ENV,
   entry: {
-    bundle: './entry.js',
+    bundle: './entry.jsx',
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },

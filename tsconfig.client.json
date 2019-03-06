@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ES2015",
+    "jsx": "preserve",
+    "outDir": "./build/client/"
+  },
+  "include": ["./client/**/*"],
+  "exclude": []
+}

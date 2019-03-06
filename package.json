@@ -5,7 +5,7 @@
   "main": "dist/start.js",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "build": "tsc && webpack",
+    "build": "tsc -p tsconfig.client.json && tsc -p tsconfig.server.json && webpack",
     "start": "node dist/start"
   },
   "dependencies": {
