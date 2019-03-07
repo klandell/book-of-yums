@@ -5,7 +5,9 @@
   "main": "dist/start.js",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "build": "tsc -p tsconfig.client.json && tsc -p tsconfig.server.json && webpack",
+    "tsc:client": "tsc -p tsconfig.client.json",
+    "tsc:server": "tsc -p tsconfig.server.json",
+    "build": "yarn tsc:client && yarn tsc:server && webpack",
     "start": "node dist/start"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "koa-response-time": "^2.1.0",
     "koa-send": "^5.0.0",
     "koa-session": "^5.10.1",
+    "pg": "^7.8.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",

@@ -1,9 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "./build/server/"
+    "target": "es2015",
+    "module": "commonjs"
   },
-  "include": ["./server/**/*"],
-  "exclude": []
+  "include": ["./server/**/*"]
 }
