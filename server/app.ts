@@ -1,4 +1,3 @@
-// cnst Koa = require('koa');
 import path from 'path';
 import Koa from 'koa';
 import timer from 'koa-response-time';
@@ -50,7 +49,7 @@ app.use(
 );
 
 // send back static files on a route miss
-app.use(async (ctx, next) => {
+app.use(async ctx => {
   const p = ctx.path === '/' ? '/index.html' : ctx.path;
   await send(ctx, p, { root: 'dist/public' });
 });
