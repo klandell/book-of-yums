@@ -1,31 +1,25 @@
-/*
-import React from 'react';
+import React, { useCallback } from 'react';
+import styled from 'styled-components';
 import VirtualizedCollection from './VirtualizedCollection';
+import Card from './Card';
+//
 
-// VirtualizedCollection
-
-
-const CardList: React.FC<Props> = props => {
+function CardList(props) {
   const { cards } = props;
-  //
 
-  return <VirtualizedCollection collection={cards} />;
-};
+  const renderItem = useCallback(item => {
+    return <Card key={item.key} />;
+  }, []);
+
+  return (
+    <VirtualizedCollection
+      collection={cards}
+      collectionSize={cards.length}
+      itemHeight={450}
+      keyProperty="key"
+      renderItem={renderItem}
+    />
+  );
+}
 
 export default CardList;
-*/
-
-/*
-        return ['red', 'blue', 'green'].map(color => (
-          <div
-            key={color}
-            style={{
-              height: 500,
-              background: color,
-              margin: 50,
-              color: '#fff',
-            }}
-          >
-            {scrollTop}
-          </div>
-*/

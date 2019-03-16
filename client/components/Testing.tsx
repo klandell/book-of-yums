@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import VirtualizedCollection from './VirtualizedCollection';
+import CardList from './CardList';
 
 const data = [];
 const colors = ['red', 'blue', 'green', 'navy', 'purple', 'pink'];
-for (let i = 0; i < 1000000; i++) {
+for (let i = 0; i < 10000; i++) {
   data.push({
     key: i,
     color: colors[i % colors.length],
@@ -11,29 +11,8 @@ for (let i = 0; i < 1000000; i++) {
 }
 
 function Testing() {
-  const renderItem = useCallback(item => {
-    //
-    return (
-      <div
-        key={item.key}
-        style={{
-          height: 'calc(300px - 40px)',
-          margin: 20,
-          background: item.color,
-          color: '#fff',
-        }}
-      >
-        {item.key}
-      </div>
-    );
-  }, []);
-
   return (
-    <VirtualizedCollection
-      collection={data}
-      itemHeight={300}
-      renderItem={renderItem}
-    />
+    <CardList cards={data} collectionSize={data.length} itemHeight={300} />
   );
 }
 
