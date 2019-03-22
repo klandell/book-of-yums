@@ -3,7 +3,16 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
-    "jsx": "preserve"
+    "jsx": "preserve",
+
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitThis": true,
+    "noEmitOnError": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true
   },
   "include": ["./client/**/*"]
 }

@@ -1,25 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { throttler } from '../lib';
+/**
+ *
+ */
+import React, { useCallback, useState } from 'react';
 import Scroller from './Scroller';
+import VirtualContainer from './VirtualContainer';
+import VirtualizedItem from './VirtualizedItem';
 
-// TODO: load more records in the collection eventually
+interface VirtualItemRenderer {
+  (o: object): React.ReactNode;
+}
 
-const Container = styled.div.attrs(({ height }) => ({
-  style: { height },
-}))`
-  position: relative;
-`;
+interface Props {
+  collection: object[];
+  collectionSize: number;
+  itemHeight: number;
+  renderItem: VirtualItemRenderer;
+  keyProperty?: string;
+  leadingBufferZone?: number;
+  trailingBufferZone?: number;
+}
 
-const Positioned = styled.div.attrs(({ top }) => ({
-  style: { top },
-}))`
-  position: absolute;
-  left: 0;
-  right: 0;
-`;
-
-const VirtualizedCollection = props => {
+const VirtualizedCollection: React.FC<Props> = (props: Props) => {
   const {
     collection,
     collectionSize,
@@ -28,7 +29,6 @@ const VirtualizedCollection = props => {
     renderItem,
     leadingBufferZone,
     trailingBufferZone,
-    throttle,
   } = props;
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -45,27 +45,20 @@ const VirtualizedCollection = props => {
   // render a subsection of the total collection
   const itemsToRender = collection.slice(leadingIndex, trailingIndex);
 
-  const scrollHandler = useCallback(
-    throttler(scroller => {
-      const { scrollTop: nextScrollTop } = scroller;
-      setScrollTop(nextScrollTop);
-    }, throttle),
-    [],
-  );
-  const onScroll = useCallback(e => scrollHandler(e.currentTarget), []);
+  const scrollHandler = useCallback(scroller => {
+    const { scrollTop: nextScrollTop } = scroller;
+    setScrollTop(nextScrollTop);
+  }, []);
 
   return (
-    <Scroller onScroll={onScroll}>
-      <Container height={itemHeight * collectionSize}>
-        {itemsToRender.map((o, i) => {
-          const top = (leadingIndex + i) * itemHeight;
-          return (
-            <Positioned key={o[keyProperty]} top={top}>
-              {renderItem(o)}
-            </Positioned>
-          );
-        })}
-      </Container>
+    <Scroller onScroll={e => scrollHandler(e.currentTarget)}>
+      <VirtualContainer height={itemHeight * collectionSize}>
+        {itemsToRender.map((o, i) => (
+          <VirtualizedItem key={o[keyProperty]} top={(leadingIndex + i) * itemHeight}>
+            {renderItem(o)}
+          </VirtualizedItem>
+        ))}
+      </VirtualContainer>
     </Scroller>
   );
 };
@@ -74,8 +67,6 @@ VirtualizedCollection.defaultProps = {
   keyProperty: 'id',
   leadingBufferZone: 100,
   trailingBufferZone: 50,
-  loadPage: null,
-  throttle: 50,
 };
 
 export default VirtualizedCollection;

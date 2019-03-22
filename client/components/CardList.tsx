@@ -1,10 +1,14 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import VirtualizedCollection from './VirtualizedCollection';
 import Card from './Card';
-//
 
-function CardList(props) {
+interface Props {
+  cards: object[]; // FIXME: better type
+}
+
+// collectionSize={data.length} itemHeight={300}
+
+const CardList: React.FC<Props> = (props: Props) => {
   const { cards } = props;
 
   const renderItem = useCallback(item => {
@@ -20,6 +24,6 @@ function CardList(props) {
       renderItem={renderItem}
     />
   );
-}
+};
 
 export default CardList;
