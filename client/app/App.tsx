@@ -1,9 +1,9 @@
 import React, { StrictMode } from 'react';
-import Testing from './components/Testing';
+import Router from './Router';
 
 const App: React.FC = () => (
   <StrictMode>
-    <Testing />
+    <Router />
   </StrictMode>
 );
 

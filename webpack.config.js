@@ -25,8 +25,21 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     path: `${__dirname}/dist/public`,
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -36,8 +49,6 @@ module.exports = {
       template: `${__dirname}/client/index.html`,
     }),
     // copy server files out to the dist directory
-    new CopyPlugin([
-      { from: `${__dirname}/build/server`, to: `${__dirname}/dist` },
-    ]),
+    new CopyPlugin([{ from: `${__dirname}/build/server`, to: `${__dirname}/dist` }]),
   ],
 };

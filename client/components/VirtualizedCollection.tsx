@@ -12,7 +12,6 @@ interface VirtualItemRenderer {
 
 interface Props {
   collection: object[];
-  collectionSize: number;
   itemHeight: number;
   renderItem: VirtualItemRenderer;
   keyProperty?: string;
@@ -23,7 +22,6 @@ interface Props {
 const VirtualizedCollection: React.FC<Props> = (props: Props) => {
   const {
     collection,
-    collectionSize,
     keyProperty,
     itemHeight,
     renderItem,
@@ -40,7 +38,7 @@ const VirtualizedCollection: React.FC<Props> = (props: Props) => {
    */
   const index = Math.floor(scrollTop / itemHeight);
   const leadingIndex = Math.max(0, index - leadingBufferZone);
-  const trailingIndex = Math.min(index + trailingBufferZone, collectionSize);
+  const trailingIndex = Math.min(index + trailingBufferZone, collection.length);
 
   // render a subsection of the total collection
   const itemsToRender = collection.slice(leadingIndex, trailingIndex);
@@ -52,7 +50,7 @@ const VirtualizedCollection: React.FC<Props> = (props: Props) => {
 
   return (
     <Scroller onScroll={e => scrollHandler(e.currentTarget)}>
-      <VirtualContainer height={itemHeight * collectionSize}>
+      <VirtualContainer height={itemHeight * collection.length}>
         {itemsToRender.map((o, i) => (
           <VirtualizedItem key={o[keyProperty]} top={(leadingIndex + i) * itemHeight}>
             {renderItem(o)}

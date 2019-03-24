@@ -51,7 +51,13 @@ app.use(
 // send back static files on a route miss
 app.use(async ctx => {
   const p = ctx.path === '/' ? '/index.html' : ctx.path;
-  await send(ctx, p, { root: 'dist/public' });
+  const cfg = { root: 'dist/public', index: '/index.html' };
+
+  try {
+    await send(ctx, p, cfg);
+  } catch (e) {
+    await send(ctx, '/index.html', cfg);
+  }
 });
 
 export default app;
