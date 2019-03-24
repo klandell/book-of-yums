@@ -8,6 +8,7 @@ module.exports = {
   context: `${__dirname}/build/client`,
   target: 'web',
   mode: NODE_ENV,
+  devtool: NODE_ENV === 'development' && 'inline-source-map',
   entry: {
     bundle: './entry.jsx',
   },
